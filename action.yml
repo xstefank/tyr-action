@@ -1,0 +1,16 @@
+name: 'Tyr action'
+description: 'Validate the GitHub pull request format'
+inputs:
+  formatUrl:
+    description: 'The format.yaml URL'
+    required: true
+  token:  # id of input
+    description: 'The GitHub token'
+    required: true
+  pushStatus:
+    desription: 'A boolean value representing whether or not Tyr should push a separate status check for the validated commit'
+    required: false
+    default: 'true'
+runs:
+  using: 'node12'
+  main: 'index.js'
