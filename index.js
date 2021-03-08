@@ -18,11 +18,20 @@ try {
 
             if (error !== null && pushStatus === 'false') {
                 // the stdout contains the error message from Tyr
-                core.setFailed(stdout)
+                core.setFailed(getValueByKey(stdout, '^>>>\\s(.*)'))
             }
             // if the pushStatus is true then the status is pushed as a part of the tyr-cli execution
             // thus finish successfully
         })
 } catch (error) {
     core.setFailed(error.message);
+}
+
+function getValueByKey(text, key){
+    var regex = new RegExp(key, "m");
+    var match = regex.exec(text);
+    if(match)
+        return match[1];
+    else
+        return null;
 }
